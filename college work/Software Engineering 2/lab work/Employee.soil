@@ -1,0 +1,28 @@
+
+-- create a company and a person
+!create ibm : Company
+!create ms : Company
+!ibm.name := 'IBM'
+!ms.name := 'Microsoft'
+
+!create joe : Person
+!set joe.name := 'Joe'
+!set joe.age := 23
+
+!create c1 : Contract
+!c1.title := 'accountant'
+!c1.salary := 20000
+!insert (joe,c1) into WorksOn
+!insert (c1,ibm) into IsAt
+
+!create c2 : Contract
+!c2.title := 'director'
+!c2.salary := 20000
+
+!insert (joe,c2) into WorksOn
+!insert (c2,ms) into IsAt
+
+
+!create tim : Person
+!set tim.name := 'Timothy'
+!set tim.age := 26

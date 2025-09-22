@@ -1,0 +1,83 @@
+-- extension of Employee model to allow a person work for many companies
+
+model Employee
+
+-- classes
+
+class Person
+attributes
+  name : String
+  age : Integer
+  income : Real
+operations
+  calcIncome()
+  begin
+    self.income := 0.0;
+    for j in self.jobs do
+      self.income := self.income + j.salary;
+    end
+  end
+end
+
+class Company
+attributes
+  name : String
+  location : String
+operations
+	hire(p : Person, t : String, s : Real)
+	begin
+		create c : Contract(title := t, salary := s);
+		insert (p, c) into WorksOn;
+	end
+	
+  
+	fire(p : Person)
+	end
+  
+end
+
+class Contract
+attributes
+  title : String
+  salary : Real
+operations
+  raiseSalary(rate : Real) : Real  
+end
+
+
+-- associations
+
+association IsAt between
+  Contract[1..*] role contracts
+  Company[1]  
+end
+
+association WorksOn between
+  Person[1]
+  Contract[*] role jobs
+end  
+
+
+-- constraints
+
+constraints
+
+context Contract::raiseSalary(rate : Real) : Real
+  pre:  self.person.age >= 21
+  
+  post raiseSalaryPost: 
+    salary = salary@pre * (1.0 + rate)
+  post resultPost:
+    result = salary
+	
+	
+context Company::hire(p: Person, t: String, s :Real)
+pre preHire1: s >= 20000
+pre preHire2: p.isDefined()
+pre preHire3: contracts.person -> excludes(p)
+post postHire1: contracts.person -> includes(p)
+post postHire2: contracts->forAll(c | c.person = p implies c.salary = s)
+
+
+
+

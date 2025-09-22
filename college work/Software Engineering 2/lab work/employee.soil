@@ -1,0 +1,10 @@
+use> !create tim:Person
+use> !create joe:Person
+use> !tim.name := 'Timothy'
+use> !tim.age := 26
+use> !joe.name := 'Joe'
+use> !joe.age := 23
+use> !openter ibm hire(tim)
+<input>:1:0: Operation `Company::hire' is defined by a soil statement and cannot be entered with openter.
+use> !ibm.hire(tim)
+use> !ibm.hire(joe)
