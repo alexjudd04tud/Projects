@@ -1,0 +1,6 @@
+Differences between Java and Python Syntax:
+
+variables are dynamically typed in python, where in java they are statically typed
+semi colons are needed to end statements in Java, whereas a new line ends a statement in java 
+Python uses indentation to define code blocks, while java uses curly braces
+Syntax for comments is also different (# for pythion, // for java)
